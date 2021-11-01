@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import './App.css';
 import reducer, {initialState} from './reducers/';
-import {addOne, applyNumber, changeOperation, clearDisplay } from './actions/';
+import {addOne, applyNumber, changeOperation, clearDisplay, mAdd, mRecall, mClear} from './actions/';
 
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
@@ -10,20 +10,24 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // const handleClick = () => {
-  //   dispatch(addOne());
-  // }
-
   const handleClick = (number) => {
+    // dispatch(addOne());
     dispatch(applyNumber(number));
   }
-
   const handleClickOp = (operator) => {
     dispatch(changeOperation(operator));
   }
-
   const handleClickClear = () => {
     dispatch(clearDisplay());
+  }
+  const handleClickMAdd = () => {
+    dispatch(mAdd());
+  }
+  const handleClickMRecall = () => {
+    dispatch(mRecall());
+  }
+  const handleClickMClear = () => {
+    dispatch(mClear())
   }
 
   return (
@@ -43,9 +47,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={handleClickMAdd}/>
+              <CalcButton value={"MR"} onClick={handleClickMRecall}/>
+              <CalcButton value={"MC"} onClick={handleClickMClear}/>
             </div>
 
             <div className="row">
